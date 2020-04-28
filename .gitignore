@@ -1,0 +1,4 @@
+.idea
+
+microservices/email/__pycache__
+microservices/user/__pycache__

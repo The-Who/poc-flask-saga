@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  user_api:
+    build:
+      context: ./microservices/user
+    command: "flask run --host=0.0.0.0"
+    ports:
+      - "5001:5000"
+    environment:
+      FLASK_APP: "main.py"
+      FLASK_ENV: "development"
+      FLASK_DEBUG: "True"
+    volumes:
+      - ./microservices/user:/usr/src/app
+    networks:
+        - backend
+
+  email_api:
+    build:
+      context: ./microservices/email
+    command: "flask run --host=0.0.0.0"
+    ports:
+      - "5002:5000"
+    environment:
+      FLASK_APP: "main.py"
+      FLASK_ENV: "development"
+      FLASK_DEBUG: "True"
+    volumes:
+      - ./microservices/email:/usr/src/app
+    networks:
+      - backend
+
+networks:
+    backend:
